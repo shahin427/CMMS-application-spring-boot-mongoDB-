@@ -1,0 +1,32 @@
+jwt:
+  header:
+    key:
+      Authorization
+  secret:
+      sec
+  expiration: 60*60*60*24
+  route:
+    authentication:
+      path: auth
+      refresh: refresh
+#main
+#spring:
+#  data:
+#    mongodb:
+#      uri: mongodb://localhost:27017/khales
+
+#test
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/khales
+
+#params:
+#  datasource:
+#    driverClassName: com.mysql.jdbc.Driverloperr
+#    jdbcUrl: jdbc:mysql://localhost:3306/saynet_net_test?useUnicode=yes&characterEncoding=UTF-8&createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&amp
+#    username: saynet_net
+#    password: S@ynet@2018
+#    maximumPoolSize: 50
+#    hikari:
+#    connection-TestConfig-query: SELECT 1

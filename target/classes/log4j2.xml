@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="ERROR" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex
+        </Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <!-- Rolling File Appender -->
+        <!--/var/log/liderland-->
+        <RollingFile name="FileAppender" fileName="log/net.log"
+                     filePattern="log/-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" />
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+        <!--&lt;!&ndash; SMTP Appender&ndash;&gt;-->
+        <!--<SMTP name="MailAppender"-->
+              <!--subject="MIGRATION Error"-->
+              <!--toDate="sayar.migration.log@gmail.com"-->
+              <!--fromDate="sayar.migration.log@gmail.com"-->
+              <!--smtpHost="smtp.gmail.com"-->
+              <!--smtpPort="465"-->
+              <!--smtpUsername="sayar.migration.log@gmail.com"-->
+              <!--smtpPassword="7391456Terminator"-->
+              <!--smtpProtocol="smtps"-->
+              <!--smtpDebug="true"-->
+              <!--bufferSize="4"-->
+              <!--ignoreExceptions="true">-->
+            <!--<ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <!--<PatternLayout>-->
+                <!--<Pattern>${LOG_PATTERN}</Pattern>-->
+            <!--</PatternLayout>-->
+        <!--</SMTP>-->
+
+
+
+    </Appenders>
+
+    <Loggers>
+        <AsyncLogger name="org.sayar.net" level="INFO"
+                     additivity="false">
+            <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="FileAppender" />
+            <!--<AppenderRef ref="MailAppender" />-->
+        </AsyncLogger>
+
+        <Root level="INFO">
+            <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="FileAppender" />
+            <!--<AppenderRef ref="MailAppender" />-->
+        </Root>
+    </Loggers>
+</Configuration>
